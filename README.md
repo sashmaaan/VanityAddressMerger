@@ -1,12 +1,6 @@
 # VanityAddressMerger
 JavaScript Client-Side Vanity Address Merger 
 
-Now Bitcoin private keys can be conveniently merged in a web browser.
-
-Here is a link to the BitcoinTalk.org forum topic discussing this project:
-https://bitcointalk.org/index.php?topic=43496.0
-
-
 Please send DONATIONS for this project to Bitcoin Address: 
 bc1qwq4afcd9v0faelxzl34dm4wfwr023zay3ekmnv
 
