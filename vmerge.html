@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vanity Address Merging Example</title>
+  <style>
+    body {
+      font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    }
+    .formelement {
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+    .formelement label {
+      display: inline-block;
+      width: 250px;
+    }
+    .formelement input {
+      width: 500px;
+      line-height: 20px;
+      margin: 0;
+      padding: 0;
+    }
+    .btnMerge {
+      height: 30px;
+      width: 200px;
+      padding: 0;
+    }
+    .validation {
+      font-weight: bold;
+    }
+    .isValid {
+      color: green;
+      font-weight: bold;
+    }
+    .isNotValid {
+      color: red;
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+  </style>  
+</head>
+<body>
+
+  <h1>Vanity Address Merging Example</h1>
+
+  <h2>Merge your private keys:</h2>
+  <div class="formelement">
+    <label for="i_bitcoinAddress">Bitcoin address</label>
+    <input type="text" name="i_bitcoinAddress" id="i_bitcoinAddress" value="">
+  </div>
+  <div class="formelement">
+    <label for="i_partialPrivKey">Partial private key</label>
+    <input type="text" name="i_partialPrivKey" id="i_partialPrivKey" value="">
+  </div>
+  <div class="formelement">
+    <label for="i_privKey">Private key</label>
+    <input type="text" name="i_privKey" id="i_privKey" value="">
+  </div>
+  <button id="btn_merge" class="btnMerge formelement">&darr; Merge &darr;</button>
+  <div class="formelement">
+    <label for="i_calculatedPrivKey">Calculated private Key</label>
+    <input type="text" name="i_calculatedPrivKey" id="i_calculatedPrivKey" value="">
+  </div>
+
+
+
+  <hr style="border: 3px black solid; margin-top: 60px;"/>
+
+  <h1>Test all six cases for all address types</h1>
+
+  <div class="formelement" style="margin: 20px 0;">
+    <label for="i_privKey_cases">Private key</label>
+    <input type="text" name="i_privKey_cases" id="i_privKey_cases" value="KyjyB2cSNKoRrLVfTWcgPX1fWARnYNq9AYiG1xJDfAWHNUs1kHb1">
+  </div>
+  <h2>P2PKH</h2>
+  <h3>No sym, no endo</h3>
+  <div class="formelement">
+    <label for="i_bitcoinAddress_p2pkh_case1">Bitcoin address</label>
+    <input type="text" name="i_bitcoinAddress_p2pkh_case1" id="i_bitcoinAddress_p2pkh_case1" value="1mfgJussUPmf8KKymuJqW31jJJLqXxu5m">
+  </div>
+  <div class="formelement">
+    <label for="i_partialPrivKey_p2pkh_case1">Partial private key</label>
+    <input type="text" name="i_partialPrivKey_p2pkh_case1" id="i_partialPrivKey_p2pkh_case1" value="Kxob4kcPnXEAqMh9PX5no7ZXGXyLx1oXewb7CNCUiMLs3AEpRmk6">
+  </div>
+  <div class="formelement">
+    <label for="i_calculatedPrivKey_p2pkh_case1">Calculated private Key</label>
+    <input type="text" 
+      name="i_calculatedPrivKey_p2pkh_case1" 
+      id="i_calculatedPrivKey_p2pkh_case1" 
+      value="L1Kr486gkAkzxTVV4LBAHMTqv5gddpvcywZgbB9aXGP3NGMxBAL5"
+      class="validation"
+      disabled>
+  </div>
+  <div id="div_isValid_p2pkh_case1"></div>
+
+  <h3>No sym, endo 1</h3>
+  <div class="formelement">
+    <label for="i_bitcoinAddress_p2pkh_case2">Bitcoin address</label>
+    <input type="text" name="i_bitcoinAddress_p2pkh_case2" id="i_bitcoinAddress_p2pkh_case2" value="1abcnk8ToeeqNmh9YPv93toMCF16pWnRB">
+  </div>
+  <div class="formelement">
+    <label for="i_partialPrivKey_p2pkh_case2">Partial private key</label>
+    <input type="text" name="i_partialPrivKey_p2pkh_case2" id="i_partialPrivKey_p2pkh_case2" value="L2pCH9xbXWB4Gf3mvTacgv6p2QoymKV1AjkUL9e8D5ys2P2pidXo">
+  </div>
+  <div class="formelement">
+    <label for="i_calculatedPrivKey_p2pkh_case2">Calculated private Key</label>
+    <input type="text" 
+      name="i_calculatedPrivKey_p2pkh_case2" 
+      id="i_calculatedPrivKey_p2pkh_case2"
+      value="KxPdqdSac9mJeJZukByziA1JxUKahvCsXLngKLUgSbp5NHcax2MK"
+      class="validation"
+      disabled>
+  </div>
+  <div id="div_isValid_p2pkh_case2"></div>
+
+  <h3>No sym, endo 2</h3>
+  <div class="formelement">
+    <label for="i_bitcoinAddress_p2pkh_case3">Bitcoin address</label>
+    <input type="text" name="i_bitcoinAddress_p2pkh_case3" id="i_bitcoinAddress_p2pkh_case3" value="1mfguj5zF5FnGvPwBdtofumW5PvGsw55a">
+  </div>
+  <div class="formelement">
+    <label for="i_partialPrivKey_p2pkh_case3">Partial private key</label>
+    <input type="text" name="i_partialPrivKey_p2pkh_case3" id="i_partialPrivKey_p2pkh_case3" value="L1Fhcdp6ot2xmH5EZJPVXuvqQ3MEYJumnG5Y2c1BMBCwvcs2hunX">
+  </div>
+  <div class="formelement">
+    <label for="i_calculatedPrivKey_p2pkh_case3">Calculated private Key</label>
+    <input type="text" 
+      name="i_calculatedPrivKey_p2pkh_case3" 
+      id="i_calculatedPrivKey_p2pkh_case3" 
+      value="L3A14nqpmautGXkm4ktk2S81pS8Luu4p6f4kecDXJkLZFc2d7KHS"
+      class="validation"
+      disabled>
+  </div>
+  <div id="div_isValid_p2pkh_case3"></div>
+
+  <h3>sym, no endo</h3>
+  <div class="formelement">
+    <label for="i_bitcoinAddress_p2pkh_case4">Bitcoin address</label>
+    <input type="text" name="i_bitcoinAddress_p2pkh_case4" id="i_bitcoinAddress_p2pkh_case4" value="1789hTeDvN27XY2gYpuYF75XrbPDjWYhcT">
+  </div>
+  <div class="formelement">
+    <label for="i_partialPrivKey_p2pkh_case4">Partial private key</label>
+    <input type="text" name="i_partialPrivKey_p2pkh_case4" id="i_partialPrivKey_p2pkh_case4" value="L1AZhLxDzZ4Y6v9eqV2CrgQgCZXXKJjZjx84yGUxZEhkBmt3AhTy">
+  </div>
+  <div class="formelement">
+    <label for="i_calculatedPrivKey_p2pkh_case4">Calculated private Key</label>
+    <input type="text" 
+      name="i_calculatedPrivKey_p2pkh_case4" 
+      id="i_calculatedPrivKey_p2pkh_case4" 
+      value="KxeJhyTw2uXhypMKAfvqNSWMZ1pEdVcUQx9VaTXrkKfZrfitjNQF"
+      class="validation"
+      disabled>
+  </div>
+  <div id="div_isValid_p2pkh_case4"></div>
+
+  <h3>sym, endo 1</h3>
+  <div class="formelement">
+    <label for="i_bitcoinAddress_p2pkh_case5">Bitcoin address</label>
+    <input type="text" name="i_bitcoinAddress_p2pkh_case5" id="i_bitcoinAddress_p2pkh_case5" value="1BLAD1GUSBdkexDeKg1rwbJPhfuD1YKYZz">
+  </div>
+  <div class="formelement">
+    <label for="i_partialPrivKey_p2pkh_case5">Partial private key</label>
+    <input type="text" name="i_partialPrivKey_p2pkh_case5" id="i_partialPrivKey_p2pkh_case5" value="KxjPgUCgmdtBXJN6ctpHGESHLKoGAgf7ebMoUS2vPqvHKjpVjWwf">
+  </div>
+  <div class="formelement">
+    <label for="i_calculatedPrivKey_p2pkh_case5">Calculated private Key</label>
+    <input type="text"
+      name="i_calculatedPrivKey_p2pkh_case5" 
+      id="i_calculatedPrivKey_p2pkh_case5" 
+      value="L39x7zihgzHw9eqxoAQuEzXnQGHfE5wFHzKbVFCNAL64yqEsT6wH"
+      class="validation"
+      disabled>
+  </div>
+  <div id="div_isValid_p2pkh_case5"></div>
+
+  <h3>sym, endo 2</h3>
+  <div class="formelement">
+    <label for="i_bitcoinAddress_p2pkh_case6">Bitcoin address</label>
+    <input type="text" name="i_bitcoinAddress_p2pkh_case6" id="i_bitcoinAddress_p2pkh_case6" value="1xyzK9Y5ys8UbtnE47Jk2MHX2fDRt8EZ8">
+  </div>
+  <div class="formelement">
+    <label for="i_partialPrivKey_p2pkh_case6">Partial private key</label>
+    <input type="text" name="i_partialPrivKey_p2pkh_case6" id="i_partialPrivKey_p2pkh_case6" value="L4RATNmjba1v4wMbeSDvGdUcHjrtWP8rpUrUgFKua7YwQvftdLyy">
+  </div>
+  <div class="formelement">
+    <label for="i_calculatedPrivKey_p2pkh_case6">Calculated private Key</label>
+    <input type="text" 
+      name="i_calculatedPrivKey_p2pkh_case6" 
+      id="i_calculatedPrivKey_p2pkh_case6" 
+      value="L2Ws1Dk1ds8zZgg58yifn7HRsM5n8nypW5sG4F7ZcYRL5wQJnehV"
+      class="validation"
+      disabled>
+  </div>
+  <div id="div_isValid_p2pkh_case6"></div>
+
+
+
+
+  <h2>P2SH</h2>
+  <h3>No sym, no endo</h3>
+  <div class="formelement">
+    <label for="i_bitcoinAddress_p2sh_case1">Bitcoin address</label>
+    <input type="text" name="i_bitcoinAddress_p2sh_case1" id="i_bitcoinAddress_p2sh_case1" value="3333NUSsjXJLhqKskRMvh7KMxAqVaiK5Pm">
+  </div>
+  <div class="formelement">
+    <label for="i_partialPrivKey_p2sh_case1">Partial private key</label>
+    <input type="text" name="i_partialPrivKey_p2sh_case1" id="i_partialPrivKey_p2sh_case1" value="Kygsmmt6Y6zviZJShhPqGpz5Ua5hqnePA7vuJSePkL5TC6f59kWj">
+  </div>
+  <div class="formelement">
+    <label for="i_calculatedPrivKey_p2sh_case1">Calculated private Key</label>
+    <input type="text" 
+      name="i_calculatedPrivKey_p2sh_case1" 
+      id="i_calculatedPrivKey_p2sh_case1" 
+      value="L2D8m9NPVkXkqf6nNWVCm4tQ87nzXbmUV7uUhFbVZF7dXCsvAhQw"
+      class="validation"
+      disabled>
+  </div>
+
+  <h3>No sym, endo 1</h3>
+  <div class="formelement">
+    <label for="i_bitcoinAddress_p2sh_case2">Bitcoin address</label>
+    <input type="text" name="i_bitcoinAddress_p2sh_case2" id="i_bitcoinAddress_p2sh_case2" value="34561g4FoGbZGJRj1SmduTz53SA2JWo8E3">
+  </div>
+  <div class="formelement">
+    <label for="i_partialPrivKey_p2sh_case2">Partial private key</label>
+    <input type="text" name="i_partialPrivKey_p2sh_case2" id="i_partialPrivKey_p2sh_case2" value="KysLVocfD9n31faGpPS4BJRCYbLSqeKV3xZEnUJgUcAtzoSjfquq">
+  </div>
+  <div class="formelement">
+    <label for="i_calculatedPrivKey_p2sh_case2">Calculated private Key</label>
+    <input type="text" 
+      name="i_calculatedPrivKey_p2sh_case2" 
+      id="i_calculatedPrivKey_p2sh_case2" 
+      value="L4HtwL8g8WBne248zf2gA4WhcXpqu3bchMX2oHU8F6LgetrFozvP"
+      class="validation"
+      disabled>
+  </div>
+
+  <h3>No sym, endo 2</h3>
+  <div class="formelement">
+    <label for="i_bitcoinAddress_p2sh_case3">Bitcoin address</label>
+    <input type="text" name="i_bitcoinAddress_p2sh_case3" id="i_bitcoinAddress_p2sh_case3" value="3ABCRsQmm8LN2v2uYXtmNSTCcWFhDh3ATs">
+  </div>
+  <div class="formelement">
+    <label for="i_partialPrivKey_p2sh_case3">Partial private key</label>
+    <input type="text" name="i_partialPrivKey_p2sh_case3" id="i_partialPrivKey_p2sh_case3" value="L1vcT7VeohJeRd6Bnty12TGSzJPaukpDvmSpHPJQV3b8vVexTUZx">
+  </div>
+  <div class="formelement">
+    <label for="i_calculatedPrivKey_p2sh_case3">Calculated private Key</label>
+    <input type="text" 
+      name="i_calculatedPrivKey_p2sh_case3" 
+      id="i_calculatedPrivKey_p2sh_case3" 
+      value="L3puuGXNmQBZvsmiJMUFWyTdQhAhHLyGFAS2uPWkScikFUugcSgu"
+      class="validation"
+      disabled>
+  </div>
+
+  <h3>sym, no endo</h3>
+  <div class="formelement">
+    <label for="i_bitcoinAddress_p2sh_case4">Bitcoin address</label>
+    <input type="text" name="i_bitcoinAddress_p2sh_case4" id="i_bitcoinAddress_p2sh_case4" value="3555nxwcpE6joPLVYBvTsUf7WkMbWqnQjv">
+  </div>
+  <div class="formelement">
+    <label for="i_partialPrivKey_p2sh_case4">Partial private key</label>
+    <input type="text" name="i_partialPrivKey_p2sh_case4" id="i_partialPrivKey_p2sh_case4" value="L4uSpG6FVdvhdQF8NxQPaiMRwTH3hm1NgxSUm4Eycsjw7cEXh1MC">
+  </div>
+  <div class="formelement">
+    <label for="i_calculatedPrivKey_p2sh_case4">Calculated private Key</label>
+    <input type="text" 
+      name="i_calculatedPrivKey_p2sh_case4" 
+      id="i_calculatedPrivKey_p2sh_case4" 
+      value="L2PBptbxXzPsWJSni9K26UT7HuZm1wtHMxTuNFHsoxhknW3gy27C"
+      class="validation"
+      disabled>
+  </div>
+
+  <h3>sym, endo 1</h3>
+  <div class="formelement">
+    <label for="i_bitcoinAddress_p2sh_case5">Bitcoin address</label>
+    <input type="text" name="i_bitcoinAddress_p2sh_case5" id="i_bitcoinAddress_p2sh_case5" value="3234m5AWRfcWRKwqpJq2hDrSpSekQyGKjU">
+  </div>
+  <div class="formelement">
+    <label for="i_partialPrivKey_p2sh_case5">Partial private key</label>
+    <input type="text" name="i_partialPrivKey_p2sh_case5" id="i_partialPrivKey_p2sh_case5" value="L4xSWGTr1TuQpR6MhsSELrsXn9xPQfoUET2pyQvmXA5h48iVKqH3">
+  </div>
+  <div class="formelement">
+    <label for="i_calculatedPrivKey_p2sh_case5">Calculated private Key</label>
+    <input type="text" 
+      name="i_calculatedPrivKey_p2sh_case5" 
+      id="i_calculatedPrivKey_p2sh_case5" 
+      value="KzoNNdcxkfQ2UFZTL4dxXSstbuXQWaM8NJUe9MAWK1dqVmP5xYyz"
+      class="validation"
+      disabled>
+  </div>
+
+  <h3>sym, endo 2</h3>
+  <div class="formelement">
+    <label for="i_bitcoinAddress_p2sh_case6">Bitcoin address</label>
+    <input type="text" name="i_bitcoinAddress_p2sh_case6" id="i_bitcoinAddress_p2sh_case6" value="37775yBsyMXuspoX6Vvi8WgLnPSSyuroaF">
+  </div>
+  <div class="formelement">
+    <label for="i_partialPrivKey_p2sh_case6">Partial private key</label>
+    <input type="text" name="i_partialPrivKey_p2sh_case6" id="i_partialPrivKey_p2sh_case6" value="L2FdycvyhDkgGEfm1adTmbibzpg1QEd7C1UEMsHU95bMJVgCCiWL">
+  </div>
+  <div class="formelement">
+    <label for="i_calculatedPrivKey_p2sh_case6">Calculated private Key</label>
+    <input type="text" 
+      name="i_calculatedPrivKey_p2sh_case6" 
+      id="i_calculatedPrivKey_p2sh_case6" 
+      value="KzMLXTuFjWskkyzEW88DH5XRaRtu2eU4scV1js58BWTjyWNajKqK"
+      class="validation"
+      disabled>
+  </div>
+
+
+
+
+  <h2>P2WPK</h2>
+  <h3>No sym, no endo</h3>
+  <div class="formelement">
+    <label for="i_bitcoinAddress_p2wpk_case1">Bitcoin address</label>
+    <input type="text" name="i_bitcoinAddress_p2wpk_case1" id="i_bitcoinAddress_p2wpk_case1" value="bc1q777xtst2sevjezw57p28qsmn4hwjs7pp6zxgdy">
+  </div>
+  <div class="formelement">
+    <label for="i_partialPrivKey_p2wpk_case1">Partial private key</label>
+    <input type="text" name="i_partialPrivKey_p2wpk_case1" id="i_partialPrivKey_p2wpk_case1" value="L1pRVoyeuyVkJWzcK5uFrSzgYHsQDVuBBdrZW9ZBBD4QzUg23kkW">
+  </div>
+  <div class="formelement">
+    <label for="i_calculatedPrivKey_p2wpk_case1">Calculated private Key</label>
+    <input type="text" 
+      name="i_calculatedPrivKey_p2wpk_case1" 
+      id="i_calculatedPrivKey_p2wpk_case1" 
+      value="L4LgVBTwsd2aRcnwytzdLgu1BqaguK2GWdq8txWGz86bKax4AdSE"
+      class="validation"
+      disabled>
+  </div>
+
+  <h3>No sym, endo 1</h3>
+  <div class="formelement">
+    <label for="i_bitcoinAddress_p2wpk_case2">Bitcoin address</label>
+    <input type="text" name="i_bitcoinAddress_p2wpk_case2" id="i_bitcoinAddress_p2wpk_case2" value="bc1q7772z87zndeunwc7evmzyk9xngd8zlv54vh8t8">
+  </div>
+  <div class="formelement">
+    <label for="i_partialPrivKey_p2wpk_case2">Partial private key</label>
+    <input type="text" name="i_partialPrivKey_p2wpk_case2" id="i_partialPrivKey_p2wpk_case2" value="KxXne4ohTQU33S37sPCrY7uQ6z9agw5YHcSNjp8KYtmSqu4vi25Y">
+  </div>
+  <div class="formelement">
+    <label for="i_calculatedPrivKey_p2wpk_case2">Calculated private Key</label>
+    <input type="text" 
+      name="i_calculatedPrivKey_p2wpk_case2" 
+      id="i_calculatedPrivKey_p2wpk_case2" 
+      value="L2grmheaiCyRPba2FC18MXu3HEaZb2Xt9kzZZstam3DJQGUyXGhq"
+      class="validation"
+      disabled>
+  </div>
+
+  <h3>No sym, endo 2</h3>
+  <div class="formelement">
+    <label for="i_bitcoinAddress_p2wpk_case3">Bitcoin address</label>
+    <input type="text" name="i_bitcoinAddress_p2wpk_case3" id="i_bitcoinAddress_p2wpk_case3" value="bc1qxxxvvdxph4dq2dzfn838gg446uj80hyka969kv">
+  </div>
+  <div class="formelement">
+    <label for="i_partialPrivKey_p2wpk_case3">Partial private key</label>
+    <input type="text" name="i_partialPrivKey_p2wpk_case3" id="i_partialPrivKey_p2wpk_case3" value="KzzJ8uK9fy3KEXoat5FYA99b28aBm2ePkQMFo58ctu3zAv9zQPW9">
+  </div>
+  <div class="formelement">
+    <label for="i_calculatedPrivKey_p2wpk_case3">Calculated private Key</label>
+    <input type="text" 
+      name="i_calculatedPrivKey_p2wpk_case3" 
+      id="i_calculatedPrivKey_p2wpk_case3" 
+      value="L2tbb4LsdfvEjnV7PXknefLmSXMJ8coS4oLUR5LxrUBbVuT8Fn3Z"
+      class="validation"
+      disabled>
+  </div>
+
+  <h3>sym, no endo</h3>
+  <div class="formelement">
+    <label for="i_bitcoinAddress_p2wpk_case4">Bitcoin address</label>
+    <input type="text" name="i_bitcoinAddress_p2wpk_case4" id="i_bitcoinAddress_p2wpk_case4" value="bc1qxxxthrkeu2875nzvn9j3jgjlqplxky9uvdlclu">
+  </div>
+  <div class="formelement">
+    <label for="i_partialPrivKey_p2wpk_case4">Partial private key</label>
+    <input type="text" name="i_partialPrivKey_p2wpk_case4" id="i_partialPrivKey_p2wpk_case4" value="L1roPbTqjjaEuhFBTAph23Sp6LzAUSaabPhdNqiGuhk4mpcB4UJZ">
+  </div>
+  <div class="formelement">
+    <label for="i_calculatedPrivKey_p2wpk_case4">Calculated private Key</label>
+    <input type="text" 
+      name="i_calculatedPrivKey_p2wpk_case4" 
+      id="i_calculatedPrivKey_p2wpk_case4" 
+      value="KyLYQDyYn63QnbSqnMjKXoYVSoGsndTVGPj3z2mB6nhtSiPcRt5x"
+      class="validation"
+      disabled>
+  </div>
+
+  <h3>sym, endo 1</h3>
+  <div class="formelement">
+    <label for="i_bitcoinAddress_p2wpk_case5">Bitcoin address</label>
+    <input type="text" name="i_bitcoinAddress_p2wpk_case5" id="i_bitcoinAddress_p2wpk_case5" value="bc1qxyz0mw3gx3qq35nzstrcr00mepz2d6dxjn9q3k">
+  </div>
+  <div class="formelement">
+    <label for="i_partialPrivKey_p2wpk_case5">Partial private key</label>
+    <input type="text" name="i_partialPrivKey_p2wpk_case5" id="i_partialPrivKey_p2wpk_case5" value="KwUPC5mVQWAwdK82aq1d9by4jL1TdPGR43bBq25sbDr2Mz6U1ns3">
+  </div>
+  <div class="formelement">
+    <label for="i_calculatedPrivKey_p2wpk_case5">Calculated private Key</label>
+    <input type="text" 
+      name="i_calculatedPrivKey_p2wpk_case5" 
+      id="i_calculatedPrivKey_p2wpk_case5" 
+      value="L1twdcHWKrahFfbtm6cF8N4ZoGVrgnYYhSYyqqFKMi1p25bBeJbC"
+      class="validation"
+      disabled>
+  </div>
+
+  <h3>sym, endo 2</h3>
+  <div class="formelement">
+    <label for="i_bitcoinAddress_p2wpk_case6">Bitcoin address</label>
+    <input type="text" name="i_bitcoinAddress_p2wpk_case6" id="i_bitcoinAddress_p2wpk_case6" value="bc1q777p2nacsv46d5js55ksyf5nqrswy54wztyhxw">
+  </div>
+  <div class="formelement">
+    <label for="i_partialPrivKey_p2wpk_case6">Partial private key</label>
+    <input type="text" name="i_partialPrivKey_p2wpk_case6" id="i_partialPrivKey_p2wpk_case6" value="L3wrFh8HHGqRuKm3makfzHKTJP4dJcPBVzs5jJstZrsfEiaipiEM">
+  </div>
+  <div class="formelement">
+    <label for="i_calculatedPrivKey_p2wpk_case6">Calculated private Key</label>
+    <input type="text" 
+      name="i_calculatedPrivKey_p2wpk_case6" 
+      id="i_calculatedPrivKey_p2wpk_case6" 
+      value="L23YoY6ZKZxWQ55XG8FRVm8GszHWw2E9Bbss7JfYcHk3ujKvN91W"
+      class="validation"
+      disabled>
+  </div>
+  
+  <script type="text/javascript" src="dist/sashmaaan.vmerge.min.js">
+  </script>
+  <script type="text/javascript" src="src/sashmaaan.main.js">
+  </script>
+</body>
+</html>
